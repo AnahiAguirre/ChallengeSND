@@ -7,17 +7,12 @@ using ChallengeSND.Web2;
 using MudBlazor.Services;
 
 
-
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app"); 
 
-// Configura el HttpClient para comunicarse con la API
-builder.Services.AddHttpClient("ChallengeSND.API", client =>
-{
-    client.BaseAddress = new Uri("https://localhost:7120/"); 
-});
-
 // Registra el HttpClient que se usa en el MedicoService
+builder.Services.AddHttpClient();
+builder.Services.AddTransient<ApiService>();
 builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("ChallengeSND.API"));
 
 // Añade los servicios necesarios

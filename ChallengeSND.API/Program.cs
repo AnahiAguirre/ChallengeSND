@@ -11,6 +11,8 @@ using System.Text;
 using ChallengeSND.Data.Models;
 using ChallengeSND.Business.MappingProfiles;
 using ChallengeSND.data.Models;
+using Microsoft.AspNetCore.Components;
+using ChallengeSND.API;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,8 +30,7 @@ builder.Services.AddScoped<IMedicoRepository, MedicoRepository>();
 builder.Services.AddScoped<IPacienteRepository, PacienteRepository>();
 builder.Services.AddScoped<IMedicoService, MedicoService>();
 builder.Services.AddScoped<IPacienteService, PacienteService>();
-builder.Services.AddScoped<ChallengeSND.Business.Servicies.AuthenticationService>();
-builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:7120") });
+builder.Services.AddScoped<AuthenticationService>();
 
 var tokenAppSetting = builder.Configuration.GetSection("Jwt");
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
