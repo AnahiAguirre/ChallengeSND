@@ -74,7 +74,7 @@ namespace ChallengeSND.api.Controllers
                 {
                     IsSuccess = false,
                     Message = $"Ocurrió un error al crear el médico: {ex.Message}",
-                    Result = null
+                    Result = null!
                 });
             }
         }
@@ -109,7 +109,7 @@ namespace ChallengeSND.api.Controllers
                 {
                     IsSuccess = false,
                     Message = $"Ocurrió un error al actualizar el médico con ID {id}: {ex.Message}",
-                    Result = null
+                    Result = null!
                 });
             }
         }
@@ -132,7 +132,7 @@ namespace ChallengeSND.api.Controllers
                 {
                     IsSuccess = false,
                     Message = $"Ocurrió un error al eliminar el médico con ID {id}: {ex.Message}",
-                    Result = null
+                    Result = null!
                 });
             }
         }

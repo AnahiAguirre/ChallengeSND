@@ -11,6 +11,7 @@ namespace ChallengeSND.data.Models
         public DbSet<Medico> Medicos { get; set; }
         public DbSet<Paciente> Pacientes { get; set; }
         public DbSet<PacienteMedico> PacientesMedicos { get; set; }
+        public DbSet<ApplicationUser> User { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

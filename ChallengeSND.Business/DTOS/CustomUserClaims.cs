@@ -6,8 +6,5 @@ using System.Threading.Tasks;
 
 namespace ChallengeSND.Business.DTOS
 {
-    public class LoginResponse
-    {
-        public string Token { get; set; } = string.Empty;
-    }
+    public record CustomUserClaims(string Name = null!, string Email = null!);
 }

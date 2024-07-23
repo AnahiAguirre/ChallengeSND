@@ -1,5 +1,8 @@
-﻿using ChallengeSND.Business.DTOS;
+﻿using ChallengeSND.api.Controllers;
+using ChallengeSND.Business.DTOS;
 using ChallengeSND.Business.Servicies;
+using ChallengeSND.Business.Servicies.Interfaces;
+using ChallengeSND.data.Responses;
 using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,21 +13,39 @@ namespace ChallengeSND.Controllers
     public class AuthController : ControllerBase
     {
         private readonly AuthenticationService _authenticationService;
+        private readonly IAccountService _accountService;
+        private readonly ILogger<AuthController> _logger;
 
-        public AuthController(AuthenticationService authenticationService)
+        public AuthController(AuthenticationService authenticationService, IAccountService accountService, ILogger<AuthController> logger)
         {
             _authenticationService = authenticationService;
+            _accountService = accountService;
+            _logger = logger;
+        }
+
+        //[HttpPost("login")]
+        //public IActionResult Login([FromBody] Business.DTOS.LoginRequest request)
+        //{
+
+        //    var user = new User { UserName = request.UserName, Role = "Admin" };
+        //    var token = _authenticationService.GenerateToken(user);
+
+         
+        //    return Ok(new { Token = token });
+        //}
+
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody] Business.DTOS.RegisterDTO request)
+        {
+            CustomResponses.RegistrationResponse response = await _accountService.RegisterAsync(request);
+            return response.Flag ? Created() : ValidationProblem(new ValidationProblemDetails { Detail = response.Message});
         }
 
         [HttpPost("login")]
-        public IActionResult Login([FromBody] Business.DTOS.LoginRequest request)
+        public async Task<IActionResult> Login([FromBody] Business.DTOS.LoginDTO request)
         {
-
-            var user = new User { UserName = request.UserName, Role = "Admin" };
-            var token = _authenticationService.GenerateToken(user);
-
-         
-            return Ok(new { Token = token });
+            CustomResponses.LoginResponse response = await _accountService.LoginAsync(request);
+            return response.Flag ? Ok(new { Token = response.JWTToken }) : ValidationProblem(new ValidationProblemDetails { Detail = response.Message });
         }
     }
 }

@@ -8,9 +8,7 @@ namespace ChallengeSND.Business.DTOS
 {
     public class LoginRequest
     {
-        public string UserName { get; set; }
-    
-        public string Role { get; set; }   
+        public string UserName { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty;
     }
-
 }

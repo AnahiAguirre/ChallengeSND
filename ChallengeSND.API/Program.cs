@@ -13,14 +13,19 @@ using ChallengeSND.Business.MappingProfiles;
 using ChallengeSND.data.Models;
 using Microsoft.AspNetCore.Components;
 using ChallengeSND.API;
+using Microsoft.Identity.Client;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
 
+builder.Services.AddRazorComponents()
+    .AddInteractiveServerComponents();
+
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddScoped<IAccountRepository, AccountRepository>();
 
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddAutoMapper(typeof(MedicoProfile),
@@ -30,6 +35,7 @@ builder.Services.AddScoped<IMedicoRepository, MedicoRepository>();
 builder.Services.AddScoped<IPacienteRepository, PacienteRepository>();
 builder.Services.AddScoped<IMedicoService, MedicoService>();
 builder.Services.AddScoped<IPacienteService, PacienteService>();
+builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<AuthenticationService>();
 
 var tokenAppSetting = builder.Configuration.GetSection("Jwt");
@@ -44,23 +50,23 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateIssuerSigningKey = true,
             ValidIssuer = tokenAppSetting.GetSection("Issuer").Value,
             ValidAudience = tokenAppSetting.GetSection("Audience").Value,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenAppSetting.GetSection("Key").Value)),
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenAppSetting.GetSection("Key").Value!)),
             RoleClaimType = "role"
         };
     });
 
-builder.Services.AddAuthorization(options =>
-{
-    options.AddPolicy("AdminPolicy", policy =>
-        policy.RequireRole("Admin"));
-});
+//builder.Services.AddAuthorization(options =>
+//{
+//    options.AddPolicy("AdminPolicy", policy =>
+//        policy.RequireRole("Admin"));
+//});
 
 builder.Services.Configure<ApiBehaviorOptions>(options => options.SuppressModelStateInvalidFilter = true);
 
 var configuration = builder.Configuration;
 var urls = configuration["urls"]?.Split(";") ?? new string[] { "http://localhost:5000" };
 var localhostUrl = urls.FirstOrDefault(u => u.Contains("localhost"));
-var port = new Uri(localhostUrl).Port;
+var port = new Uri(localhostUrl!).Port;
 
 var corsAllowedOrigin = $"https://localhost:{port}";
 
@@ -118,7 +124,8 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddControllers();
 
 var app = builder.Build();
-
+//app.MapRazorComponents()
+//    .AddInteractiveServerRenderMode();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
