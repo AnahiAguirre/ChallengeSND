@@ -30,15 +30,15 @@
 
     async Task LoginClicked()
     {
-        // LoginResponse.LoginResponse response = await accountService.LoginAsync(LoginDto);
-        // if (!response.Flag)
-        // {
-        //     await js.InvokeVoidAsync("alert", response.Message);
-        //     return;
-        // }
+        LoginResponse.LoginResponse response = await accountService.LoginAsync(LoginDto);
+        if (!response.Flag)
+        {
+            await js.InvokeVoidAsync("alert", response.Message);
+            return;
+        }
 
-        // var customAuthStateProvider = (CustomAuthenticationStateProvider)AuthStateProvider;
-        // customAuthStateProvider.UpdateAuthenticationState(response.JWTToken);
+        var customAuthStateProvider = (CustomAuthenticationStateProvider)AuthStateProvider;
+        customAuthStateProvider.UpdateAuthenticationState(response.JWTToken);
         NavManager.NavigateTo("/", forceLoad: true);
     }
 }

@@ -3,7 +3,6 @@ using ChallengeSND.Business.Servicies.Interfaces;
 using ChallengeSND.Web2.Services;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using ChallengeSND.Business.Profiles;
-using ChallengeSND.Web2;
 using MudBlazor.Services;
 using ChallengeSND.Web2.States;
 using Microsoft.AspNetCore.Components.Authorization;
