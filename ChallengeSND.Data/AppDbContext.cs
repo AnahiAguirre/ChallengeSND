@@ -1,7 +1,7 @@
 ﻿using ChallengeSND.Data.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace ChallengeSND.data.Models
+namespace ChallengeSND.Data.Models
 {
     public class AppDbContext : DbContext
     {

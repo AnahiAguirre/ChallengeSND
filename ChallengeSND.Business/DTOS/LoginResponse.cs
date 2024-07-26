@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ChallengeSND.Data.Responses;
 
 namespace ChallengeSND.Business.DTOS
 {
-    public class LoginResponse
+    public class LoginResponse : CustomResponses
     {
         public string Token { get; set; } = string.Empty;
     }

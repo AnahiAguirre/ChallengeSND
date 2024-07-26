@@ -5,10 +5,13 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using ChallengeSND.Business.Profiles;
 using ChallengeSND.Web2;
 using MudBlazor.Services;
+using ChallengeSND.Web2.States;
+using Microsoft.AspNetCore.Components.Authorization;
+using ChallengeSND.Web2.Pages;
 
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
-builder.RootComponents.Add<App>("#app"); 
+builder.RootComponents.Add<Home>("#app"); 
 
 // Registra el HttpClient que se usa en el MedicoService
 builder.Services.AddHttpClient();
@@ -19,6 +22,8 @@ builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().Cre
 builder.Services.AddScoped<IMedicoService, MedicoService>();
 builder.Services.AddScoped<MedicoService>();
 builder.Services.AddScoped<JwtAuthenticationStateProvider>();
+builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
+builder.Services.AddScoped<IAccountService, AccountService>();
 
 // Configura la autenticación
 builder.Services.AddAuthorizationCore();

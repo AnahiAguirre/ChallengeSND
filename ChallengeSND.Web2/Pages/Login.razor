@@ -1,49 +1,44 @@
-﻿@page "/login"
-@using ChallengeSND.Business.DTOS
-@using ChallengeSND.Web2.Services
-@using Microsoft.AspNetCore.Components.Forms
-@using System.Net.Http.Json
-@inject HttpClient Http
-@inject NavigationManager Navigation
-@inject JwtAuthenticationStateProvider AuthProvider
+﻿@inject IJSRuntime js
 
-<h3>Login</h3>
+@page "/login"
 
-<EditForm Model="@loginRequest" OnValidSubmit="HandleLogin">
-    <DataAnnotationsValidator />
-    <ValidationSummary />
-
-    <div class="form-group">
-        <label for="username">Username</label>
-        <InputText id="username" @bind-Value="loginRequest.UserName" class="form-control" />
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            <h2>Login</h2>
+            <EditForm Model="@LoginDto" OnValidSubmit="LoginClicked">
+                <DataAnnotationsValidator />
+                <div class="form-group">
+                    <label class="from-label" for="email">Email</label>
+                    <InputText id="email" @bind-Value="LoginDto.Email" class="form-control" />
+                </div>
+                <div class="form-group mt-3">
+                    <label for="password">Password</label>
+                    <InputText id="password" @bind-Value="LoginDto.Password" type="password" class="form-control" />
+                </div>
+                <div class="form-group mt-3">
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </div>
+                <ValidationSummary />
+            </EditForm>
+        </div>
     </div>
-    <div class="form-group">
-        <label for="password">Password</label>
-        <InputText id="password" @bind-Value="loginRequest.Password" type="password" class="form-control" />
-    </div>
-    <button type="submit" class="btn btn-primary">Login</button>
-</EditForm>
+</div>
 
 @code {
-    private LoginRequest loginRequest = new LoginRequest();
+    public LoginDTO LoginDto = new();
 
-    private async Task HandleLogin()
+    async Task LoginClicked()
     {
-        try
-        {
-            var response = await Http.PostAsJsonAsync("api/auth/login", loginRequest);
-            response.EnsureSuccessStatusCode();
-            var result = await response.Content.ReadFromJsonAsync<LoginResponse>();
-            if (result != null)
-            {
-                await AuthProvider.MarkUserAsAuthenticated(result.Token);
-                Navigation.NavigateTo("/");
-            }
-        }
-        catch (Exception ex)
-        {
-            // Manejo de errores simple
-            Console.WriteLine($"Login failed: {ex.Message}");
-        }
+        // LoginResponse.LoginResponse response = await accountService.LoginAsync(LoginDto);
+        // if (!response.Flag)
+        // {
+        //     await js.InvokeVoidAsync("alert", response.Message);
+        //     return;
+        // }
+
+        // var customAuthStateProvider = (CustomAuthenticationStateProvider)AuthStateProvider;
+        // customAuthStateProvider.UpdateAuthenticationState(response.JWTToken);
+        NavManager.NavigateTo("/", forceLoad: true);
     }
 }

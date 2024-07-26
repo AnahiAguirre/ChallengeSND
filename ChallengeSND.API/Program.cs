@@ -10,10 +10,7 @@ using Microsoft.OpenApi.Models;
 using System.Text;
 using ChallengeSND.Data.Models;
 using ChallengeSND.Business.MappingProfiles;
-using ChallengeSND.data.Models;
-using Microsoft.AspNetCore.Components;
-using ChallengeSND.API;
-using Microsoft.Identity.Client;
+using ChallengeSND.Business.Profiles;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,14 +22,15 @@ builder.Services.AddRazorComponents()
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-builder.Services.AddScoped<IAccountRepository, AccountRepository>();
 
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddAutoMapper(typeof(MedicoProfile),
-                               typeof(PacienteProfile));
+                               typeof(PacienteProfile),
+                               typeof(AccountProfile));
 
 builder.Services.AddScoped<IMedicoRepository, MedicoRepository>();
 builder.Services.AddScoped<IPacienteRepository, PacienteRepository>();
+builder.Services.AddScoped<IAccountRepository, AccountRepository>();
 builder.Services.AddScoped<IMedicoService, MedicoService>();
 builder.Services.AddScoped<IPacienteService, PacienteService>();
 builder.Services.AddScoped<IAccountService, AccountService>();

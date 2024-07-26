@@ -1,11 +1,11 @@
-﻿using ChallengeSND.data.Models;
+﻿using ChallengeSND.Data.Models;
 using ChallengeSND.Data.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ChallengeSND.data.Repositories
+namespace ChallengeSND.Data.Repositories
 {
     public class Repository<T> : IRepository<T> where T : class
     {

@@ -1,6 +1,5 @@
-﻿using System.Threading.Tasks;
-using ChallengeSND.data.Models;
-using ChallengeSND.data.Repositories;
+﻿using ChallengeSND.Data.Models;
+using ChallengeSND.Data.Repositories;
 using ChallengeSND.Data.Repositories.Interfaces;
 
 namespace ChallengeSND.Data

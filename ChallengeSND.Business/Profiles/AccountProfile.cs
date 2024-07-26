@@ -14,6 +14,7 @@ namespace ChallengeSND.Business.Profiles
         public AccountProfile()
         {
             CreateMap<ApplicationUser, LoginDTO>();
+            CreateMap<ApplicationUser, RegisterDTO>();
         }
     }
 }

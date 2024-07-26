@@ -1,7 +1,4 @@
-﻿using ChallengeSND.data.Repositories;
-using ChallengeSND.Data.Models;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using ChallengeSND.Data.Models;
 
 namespace ChallengeSND.Data.Repositories.Interfaces
 {

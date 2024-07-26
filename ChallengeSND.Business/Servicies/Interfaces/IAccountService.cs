@@ -1,5 +1,5 @@
 ﻿using ChallengeSND.Business.DTOS;
-using ChallengeSND.data.Responses;
+using ChallengeSND.Data.Responses;
 
 namespace ChallengeSND.Business.Servicies.Interfaces
 {

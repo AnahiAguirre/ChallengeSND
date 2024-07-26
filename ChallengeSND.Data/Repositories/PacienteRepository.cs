@@ -1,10 +1,6 @@
-﻿using ChallengeSND.data.Models;
-using ChallengeSND.data.Repositories;
-using ChallengeSND.Data.Models;
+﻿using ChallengeSND.Data.Models;
 using ChallengeSND.Data.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace ChallengeSND.Data.Repositories
 {

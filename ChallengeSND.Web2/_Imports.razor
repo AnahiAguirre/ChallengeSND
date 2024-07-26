@@ -1,10 +1,26 @@
 ﻿@using System.Net.Http
+@using System.Net.Http.Json
 @using Microsoft.AspNetCore.Authorization
 @using Microsoft.AspNetCore.Components.Authorization
-@using Microsoft.AspNetCore.Components.Web
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 @using Microsoft.AspNetCore.Components.WebAssembly.Hosting
-@using ChallengeSND.Web2
-@using ChallengeSND.Web2.Services
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.AspNetCore.Components.Web
+@using Microsoft.AspNetCore.Components.Web.Virtualization
+@using static Microsoft.AspNetCore.Components.Web.RenderMode
 @using MudBlazor
 @using MudBlazor.Services
+@using Microsoft.JSInterop
+@using ChallengeSND.Web2
+@using ChallengeSND.Web2.Services
+
+@using ChallengeSND.Business.Servicies
+@using ChallengeSND.Web2.States
+@using ChallengeSND.Business.DTOS
+@using ChallengeSND.Business.Servicies.Interfaces
+
+@inject HttpClient Http
+@inject NavigationManager NavManager
+@inject JwtAuthenticationStateProvider AuthProvider
+@inject AuthenticationStateProvider AuthStateProvider
+@inject IAccountService accountService

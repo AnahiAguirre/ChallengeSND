@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ChallengeSND.data.Responses
+namespace ChallengeSND.Data.Responses
 {
     public class CustomResponses
     {

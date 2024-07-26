@@ -2,7 +2,7 @@
 using ChallengeSND.Business.DTOS;
 using ChallengeSND.Business.Servicies;
 using ChallengeSND.Business.Servicies.Interfaces;
-using ChallengeSND.data.Responses;
+using ChallengeSND.Data.Responses;
 using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,17 +22,6 @@ namespace ChallengeSND.Controllers
             _accountService = accountService;
             _logger = logger;
         }
-
-        //[HttpPost("login")]
-        //public IActionResult Login([FromBody] Business.DTOS.LoginRequest request)
-        //{
-
-        //    var user = new User { UserName = request.UserName, Role = "Admin" };
-        //    var token = _authenticationService.GenerateToken(user);
-
-         
-        //    return Ok(new { Token = token });
-        //}
 
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] Business.DTOS.RegisterDTO request)

@@ -1,13 +1,5 @@
-﻿using ChallengeSND.data.Models;
-using ChallengeSND.Data.Models;
-using ChallengeSND.data.Repositories;
+﻿using ChallengeSND.Data.Models;
 using ChallengeSND.Data.Repositories.Interfaces;
-using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
 namespace ChallengeSND.Data.Repositories
@@ -19,10 +11,10 @@ namespace ChallengeSND.Data.Repositories
         {
             _context = context;
         }
-        public async Task<ApplicationUser> GetUser(string email)
+        public async Task<ApplicationUser?> GetUser(string email)
         {
             return await _context.User
-                .FirstAsync(x => x.Email == email);
+                .FirstOrDefaultAsync(x => x.Email == email);
         }
     }
 }

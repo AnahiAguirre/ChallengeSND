@@ -1,5 +1,4 @@
-﻿using ChallengeSND.data.Models;
-using ChallengeSND.Data.Models;
+﻿using ChallengeSND.Data.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;

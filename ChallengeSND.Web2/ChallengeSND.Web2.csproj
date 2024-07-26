@@ -19,7 +19,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ChallengeSND.Business\ChallengeSND.Business.csproj" />
-    <ProjectReference Include="..\ChallengeSND.Data\ChallengeSND.Data.csproj" />
   </ItemGroup>
 
 </Project>

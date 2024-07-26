@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using ChallengeSND.Business.DTOS;
 using ChallengeSND.Business.Servicies.Interfaces;
-using ChallengeSND.data.Responses;
+using ChallengeSND.Data.Responses;
 using ChallengeSND.Data.Repositories.Interfaces;
 using Microsoft.Extensions.Configuration;
 using ChallengeSND.Data.Models;
@@ -19,8 +19,8 @@ namespace ChallengeSND.Business.Servicies
         }
         public async Task<CustomResponses.LoginResponse> LoginAsync(LoginDTO model)
         {
-            ApplicationUser findUser = await _accountRepository.GetUser(model.Email);
-            if (findUser != null) return new CustomResponses.LoginResponse(false, "Usuario existente");
+            ApplicationUser? findUser = await _accountRepository.GetUser(model.Email);
+            if (findUser == null) return new CustomResponses.LoginResponse(false, "Usuario inexistente");
 
             if (!BCrypt.Net.BCrypt.Verify(model.Password, findUser!.Password))
                 return new CustomResponses.LoginResponse(false, "Email o password incorrecto");
@@ -31,7 +31,7 @@ namespace ChallengeSND.Business.Servicies
 
         public async Task<CustomResponses.RegistrationResponse> RegisterAsync(RegisterDTO model)
         {
-            var findUser = await _accountRepository.GetUser(model.Email);
+            ApplicationUser? findUser = await _accountRepository.GetUser(model.Email);
             if (findUser != null) return new CustomResponses.RegistrationResponse(false, "Usuario existente");
 
             await _accountRepository.AddAsync(new ApplicationUser()
